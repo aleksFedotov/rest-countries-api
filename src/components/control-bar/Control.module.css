@@ -1,0 +1,9 @@
+.control {
+  max-width: 128rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 5rem;
+}

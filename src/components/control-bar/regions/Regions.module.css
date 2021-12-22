@@ -1,0 +1,35 @@
+.filter {
+  width: 20rem;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.filter i {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.filter_box {
+  position: relative;
+}
+
+.options {
+  position: absolute;
+  margin-top: 4px;
+  width: 20rem;
+  height: 0;
+}
+.options ul {
+  list-style: none;
+  text-align: left;
+  padding: 2rem;
+  color: transparent;
+}
+
+.options li:not(:first-child) {
+  margin-top: 1rem;
+  cursor: pointer;
+}

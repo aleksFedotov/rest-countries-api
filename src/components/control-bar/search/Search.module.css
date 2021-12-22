@@ -1,0 +1,29 @@
+.search {
+  width: 48rem;
+  height: 5.6rem;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  color: var(--color-input);
+}
+
+.search input {
+  border: none;
+  color: inherit;
+  font-weight: 400;
+  font-size: 1.4rem;
+  margin-left: 3rem;
+  background-color: transparent;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search input:focus::placeholder {
+  color: transparent;
+}
+
+.icon {
+  font-size: 1.6rem;
+}
