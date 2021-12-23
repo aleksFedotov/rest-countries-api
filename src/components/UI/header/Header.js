@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun } from '@fortawesome/free-regular-svg-icons';
+import { faMoon } from '@fortawesome/free-regular-svg-icons';
+
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -19,7 +23,7 @@ const Header = () => {
       <div className={styles.header_box}>
         <h1 className={styles.logo}>Where in the world?</h1>
         <div className={styles['theme-switcher']} onClick={themeSwithcHandler}>
-          <i class={isLigthTheme ? 'far fa-moon' : 'fas fa-sun'}></i>
+          <FontAwesomeIcon icon={isLigthTheme ? faMoon : faSun} />
           <p>{isLigthTheme ? 'Dark Mode' : 'Ligth Mode'}</p>
         </div>
       </div>

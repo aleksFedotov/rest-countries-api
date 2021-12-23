@@ -7,11 +7,11 @@ import styles from './Control.module.css';
 
 const Control = () => {
   return (
-    <div className={styles.control}>
+    <section className={styles.control}>
       <Search />
 
       <Regions />
-    </div>
+    </section>
   );
 };
 

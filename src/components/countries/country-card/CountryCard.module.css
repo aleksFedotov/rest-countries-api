@@ -1,0 +1,13 @@
+.country {
+  width: 26rem;
+}
+
+.flag_box {
+  height: 16rem;
+  width: 100%;
+}
+
+.flag_box img {
+  height: auto;
+  width: 100%;
+}

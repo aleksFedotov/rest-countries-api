@@ -1,0 +1,12 @@
+.countries-grid {
+  max-width: 128.1rem;
+  width: 100%;
+  margin: auto;
+  margin-top: 5rem;
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(264px, 264px));
+
+  gap: 7.5rem;
+  justify-content: center;
+}

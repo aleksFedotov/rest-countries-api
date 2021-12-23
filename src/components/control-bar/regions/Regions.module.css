@@ -7,9 +7,22 @@
   padding: 0 2rem;
 }
 
-.filter i {
+.filter p {
+  cursor: pointer;
+}
+
+.chevron {
   font-size: 1.2rem;
   cursor: pointer;
+  transition: transform 0.3s linear;
+}
+
+.down {
+  transform: rotate(0);
+}
+
+.up {
+  transform: rotate(180deg);
 }
 
 .filter_box {
@@ -20,16 +33,42 @@
   position: absolute;
   margin-top: 4px;
   width: 20rem;
-  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  z-index: 1;
 }
 .options ul {
   list-style: none;
   text-align: left;
   padding: 2rem;
-  color: transparent;
+}
+
+.options li {
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.options li:hover {
+  transform: scale(1.1);
+}
+
+.options li:active {
+  transform: scale(0.98);
 }
 
 .options li:not(:first-child) {
   margin-top: 1rem;
-  cursor: pointer;
+}
+
+.options.droped {
+  max-height: 20rem;
+}
+
+.options.droped {
+  max-height: 20rem;
+}
+.options.droped li {
+  opacity: 1;
 }
