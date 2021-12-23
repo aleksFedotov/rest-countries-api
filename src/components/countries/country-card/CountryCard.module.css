@@ -3,11 +3,16 @@
 }
 
 .flag_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   height: 16rem;
   width: 100%;
 }
 
 .flag_box img {
-  height: auto;
+  flex-shrink: 0;
+  height: 100%;
   width: 100%;
 }
