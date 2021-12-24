@@ -7,14 +7,14 @@ import styles from './CountryCard.module.css';
 const CountryCard = (props) => {
   const { flagURL, name, population, region, capital } = props;
   return (
-    <Card className={styles.county}>
+    <Card className={styles.country}>
       <div className={styles.flag_box}>
         <img src={flagURL} alt="flag" />
       </div>
       <div className={styles.country_info}>
         <h2 className={styles.country_name}>{name}</h2>
         <p className={styles.country_text}>
-          Population: <span>{population}</span>
+          Population: <span>{population.toLocaleString('en-US')}</span>
         </p>
         <p className={styles.country_text}>
           Region: <span>{region}</span>

@@ -1,5 +1,18 @@
 .country {
-  width: 26rem;
+  width: 26.4rem;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.country:hover {
+  transform: scale(1.05);
+  box-shadow: 20px 20px 40px 0px rgba(0, 0, 0, 0.5);
+}
+
+.country:active {
+  transform: scale(0.98);
+  box-shadow: 5px 5px 40px 0px rgba(0, 0, 0, 0.5);
 }
 
 .flag_box {
@@ -15,4 +28,12 @@
   flex-shrink: 0;
   height: 100%;
   width: 100%;
+}
+
+.country_info {
+  padding: 3rem 2.4rem;
+}
+
+.country_name {
+  margin-bottom: 1.8rem;
 }
