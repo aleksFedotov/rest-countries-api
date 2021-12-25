@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getCountries } from '../../store/index';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './CountriesList.module.css';
 import CountryCard from './country-card/CountryCard';
 
 const CountriesList = () => {
-  const [countries, setCoutries] = useState([]);
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.countries.loadedCountries);
+  const isLoading = useSelector((state) => state.countries.isLoading);
+  const error = useSelector((state) => state.countries.error);
 
   useEffect(() => {
-    const fetchCountries = async () => {
-      const res = await fetch('https://restcountries.com/v2/all');
+    dispatch(getCountries('All'));
+  }, [dispatch]);
 
-      if (!res.ok) {
-        return;
-      }
-
-      const resData = await res.json();
-
-      setCoutries(resData.slice(0, 12));
-    };
-
-    fetchCountries();
-  }, []);
-
-  console.log(countries);
-  return (
-    <section className={styles['countries-grid']}>
+  let content = (
+    <Fragment>
       {countries.map((country) => {
         return (
           <CountryCard
@@ -37,8 +33,22 @@ const CountriesList = () => {
           />
         );
       })}
-    </section>
+    </Fragment>
   );
+
+  if (isLoading) {
+    content = <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />;
+  }
+
+  if (!countries.length && !isLoading) {
+    content = <h3>Sorry, cannot find the country you're searching for.</h3>;
+  }
+
+  if (error) {
+    content = <h3>Sorry, something went wrong. Please try again later.</h3>;
+  }
+
+  return <section className={styles['countries-grid']}>{content}</section>;
 };
 
 export default CountriesList;

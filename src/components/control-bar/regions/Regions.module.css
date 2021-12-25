@@ -63,11 +63,7 @@
 }
 
 .options.droped {
-  max-height: 20rem;
-}
-
-.options.droped {
-  max-height: 20rem;
+  max-height: 25rem;
 }
 .options.droped li {
   opacity: 1;

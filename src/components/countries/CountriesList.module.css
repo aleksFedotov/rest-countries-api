@@ -1,6 +1,7 @@
 .countries-grid {
   max-width: 128.1rem;
   width: 100%;
+
   margin: auto;
   margin-top: 5rem;
   display: grid;
@@ -12,4 +13,23 @@
   /* display: flex;
   justify-content: space-between;
   flex-wrap: wrap; */
+}
+
+.spinner {
+  font-size: 5rem;
+  animation: spin infinite 3s linear;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

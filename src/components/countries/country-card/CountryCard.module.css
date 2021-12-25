@@ -35,5 +35,15 @@
 }
 
 .country_name {
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.4rem;
+  font-size: 1.8rem;
+}
+
+.country_text {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.country_text span {
+  font-weight: 300;
 }

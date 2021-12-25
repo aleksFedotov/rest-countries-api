@@ -12,16 +12,16 @@ const CountryCard = (props) => {
         <img src={flagURL} alt="flag" />
       </div>
       <div className={styles.country_info}>
-        <h2 className={styles.country_name}>{name}</h2>
-        <p className={styles.country_text}>
+        <h3 className={styles.country_name}>{name}</h3>
+        <h2 className={styles.country_text}>
           Population: <span>{population.toLocaleString('en-US')}</span>
-        </p>
-        <p className={styles.country_text}>
+        </h2>
+        <h2 className={styles.country_text}>
           Region: <span>{region}</span>
-        </p>
-        <p className={styles.country_text}>
+        </h2>
+        <h2 className={styles.country_text}>
           Capital: <span>{capital}</span>
-        </p>
+        </h2>
       </div>
     </Card>
   );
