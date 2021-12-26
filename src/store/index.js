@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const initialState = {
   loadedCountries: [],
+  country: [],
   isLoading: true,
   error: false,
 };
@@ -14,6 +15,13 @@ const countriesSlice = createSlice({
     storeCounries(state, action) {
       const { loadedCountries, isLoading, error } = action.payload;
       state.loadedCountries = loadedCountries;
+      state.isLoading = isLoading;
+      state.error = error;
+      state.country = [];
+    },
+    storeCountryDetail(state, action) {
+      const { countryDetail, isLoading, error } = action.payload;
+      state.country = countryDetail;
       state.isLoading = isLoading;
       state.error = error;
     },
@@ -40,20 +48,61 @@ export const getCountries = (query, isRegion = false) => {
 
     const fetchData = async () => {
       const res = await axios.get(url);
+      if (res.data.status) {
+        return [];
+      }
       if (!res.data.length) return;
 
       return res.data;
     };
+
     try {
       countries = await fetchData();
-
       isLoading = false;
-    } catch {
+    } catch (err) {
       error = true;
     }
+
     dispatch(
       countriesSlice.actions.storeCounries({
         loadedCountries: countries,
+        isLoading,
+        error,
+      })
+    );
+  };
+};
+
+export const getCountyDetail = (query) => {
+  console.log('get detail');
+  return async (dispatch) => {
+    let countryDetail;
+    let isLoading = true;
+    let error = false;
+
+    const fetchCountry = async () => {
+      const res = await axios.get(
+        `https://restcountries.com/v2/name/${query}?fullText=true`
+      );
+      if (res.data.status) {
+        return [];
+      }
+      if (!res.data.length) return;
+
+      return res.data;
+    };
+
+    try {
+      const countries = await fetchCountry();
+      countryDetail = countries[0];
+      isLoading = false;
+    } catch (err) {
+      error = true;
+    }
+
+    dispatch(
+      countriesSlice.actions.storeCountryDetail({
+        countryDetail,
         isLoading,
         error,
       })

@@ -9,7 +9,6 @@ const Control = () => {
   return (
     <section className={styles.control}>
       <Search />
-
       <Regions />
     </section>
   );

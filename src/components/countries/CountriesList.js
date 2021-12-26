@@ -11,9 +11,9 @@ import CountryCard from './country-card/CountryCard';
 
 const CountriesList = () => {
   const dispatch = useDispatch();
-  const countries = useSelector((state) => state.countries.loadedCountries);
-  const isLoading = useSelector((state) => state.countries.isLoading);
-  const error = useSelector((state) => state.countries.error);
+  const countriesData = useSelector((state) => state.countries);
+
+  const { loadedCountries, isLoading, error } = countriesData;
 
   useEffect(() => {
     dispatch(getCountries('All'));
@@ -21,10 +21,10 @@ const CountriesList = () => {
 
   let content = (
     <Fragment>
-      {countries.map((country) => {
+      {loadedCountries.map((country) => {
         return (
           <CountryCard
-            key={country.numericCode}
+            key={country.name}
             name={country.name}
             population={country.population}
             capital={country.capital}
@@ -40,7 +40,7 @@ const CountriesList = () => {
     content = <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />;
   }
 
-  if (!countries.length && !isLoading) {
+  if (!loadedCountries.length && !isLoading) {
     content = <h3>Sorry, cannot find the country you're searching for.</h3>;
   }
 

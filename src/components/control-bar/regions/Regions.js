@@ -13,20 +13,27 @@ const Regions = () => {
   const [isDroped, setIsDroped] = useState(false);
 
   const dropHandler = () => {
-    console.log('click');
     setIsDroped((prevState) => !prevState);
   };
 
+  // Sending request after choosing region + extra option (All world)
+
   const regionSearchHandler = (e) => {
     const region = e.target.innerText;
+    e.target.className = styles.selected;
+
     if (region === 'All world') {
       dispatch(getCountries('All'));
       return;
     }
+
     dispatch(getCountries(region, true));
   };
 
+  // Styling chevron based on state of dropmenu
+
   const chevronClass = isDroped ? styles.up : styles.down;
+
   return (
     <div className={styles.filter_box}>
       <Card className={styles.filter}>
@@ -39,12 +46,24 @@ const Regions = () => {
       </Card>
       <Card className={`${styles.options} ${isDroped ? styles.droped : ''}`}>
         <ul>
-          <li onClick={regionSearchHandler}>All world</li>
-          <li onClick={regionSearchHandler}>Africa</li>
-          <li onClick={regionSearchHandler}>Asia</li>
-          <li onClick={regionSearchHandler}>Europe</li>
-          <li onClick={regionSearchHandler}>Oceania</li>
-          <li onClick={regionSearchHandler}>Americas</li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            All world
+          </li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            Africa
+          </li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            Asia
+          </li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            Europe
+          </li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            Oceania
+          </li>
+          <li className={styles.option} onClick={regionSearchHandler}>
+            Americas
+          </li>
         </ul>
       </Card>
     </div>

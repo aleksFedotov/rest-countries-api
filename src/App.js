@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/UI/header/Header';
 import Home from './pages/Home';
+import CountryDetails from './pages/CountryDetails';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/country/:countryName" element={<CountryDetails />} />
         </Routes>
       </main>
     </div>
