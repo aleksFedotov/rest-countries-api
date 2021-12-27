@@ -13,15 +13,50 @@ const CountriesList = () => {
   const dispatch = useDispatch();
   const countriesData = useSelector((state) => state.countries);
 
-  const { loadedCountries, isLoading, error } = countriesData;
+  const { loadedCountries, isLoading, error, filterStatus } = countriesData;
 
   useEffect(() => {
+    if (loadedCountries) return;
+
     dispatch(getCountries('All'));
   }, [dispatch]);
 
+  let countriesList;
+
+  switch (filterStatus) {
+    case 'Africa':
+      countriesList = loadedCountries.filter(
+        (country) => country.region === 'Africa'
+      );
+      break;
+    case 'Asia':
+      countriesList = loadedCountries.filter(
+        (country) => country.region === 'Asia'
+      );
+      break;
+    case 'Europe':
+      countriesList = loadedCountries.filter(
+        (country) => country.region === 'Europe'
+      );
+      break;
+    case 'Ocenia':
+      countriesList = loadedCountries.filter(
+        (country) => country.region === 'Ocenia'
+      );
+      break;
+    case 'America':
+      countriesList = loadedCountries.filter(
+        (country) => country.region === 'Americas'
+      );
+      break;
+
+    default:
+      countriesList = loadedCountries;
+  }
+
   let content = (
     <Fragment>
-      {loadedCountries.map((country) => {
+      {countriesList.map((country) => {
         return (
           <CountryCard
             key={country.name}

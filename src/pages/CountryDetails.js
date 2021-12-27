@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCountyDetail } from '../store/index';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { getCountryDetails } from '../store';
+import { getCountries } from '../store';
 
 import Card from '../components/UI/card/Card';
 import Country from '../components/country-detail/Country';
@@ -12,34 +16,43 @@ import styles from './CountryDetails.module.css';
 
 const CountryDetails = () => {
   const dispatch = useDispatch();
-  const countriesData = useSelector((state) => state.countries);
-  const { country, isLoading, error } = countriesData;
-  console.log(country, isLoading, error);
+  const navigate = useNavigate();
 
   const params = useParams();
   const { countryName } = params;
 
+  const loadedCountryData = useSelector((state) => state.countries);
+
+  const { loadedCountryDetails, isLoading, loadedCountries } =
+    loadedCountryData;
+
   useEffect(() => {
-    dispatch(getCountyDetail(countryName));
-  }, [dispatch, countryName]);
+    // if (!loadedCountries) {
+    //   dispatch(getCountries('All'));
+    // }
 
-  let content = <Country country={country} />;
+    dispatch(getCountryDetails(countryName));
+  }, [dispatch, countryName, loadedCountries]);
 
-  if (isLoading && !country.length) {
+  const headBackHandler = () => {
+    navigate('/');
+  };
+
+  let content;
+
+  if (isLoading || !loadedCountryDetails) {
     content = <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />;
   }
 
-  if (!country && !isLoading) {
-    content = <h3>Sorry, cannot find the country you're searching for.</h3>;
-  }
-
-  if (error) {
-    content = <h3>Sorry, something went wrong. Please try again later.</h3>;
+  if (loadedCountryDetails) {
+    content = <Country country={loadedCountryDetails} />;
   }
 
   return (
     <div className={styles.details}>
-      <Card>Back</Card>
+      <Card className={styles.back_btn} onClick={headBackHandler}>
+        <FontAwesomeIcon icon={faArrowLeft} className={styles.arrow} /> Back
+      </Card>
       {content}
     </div>
   );

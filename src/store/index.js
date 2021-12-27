@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const initialState = {
   loadedCountries: [],
-  country: [],
+  loadedCountryDetails: null,
+  filterStatus: 'All world',
   isLoading: true,
   error: false,
 };
@@ -12,38 +13,36 @@ const countriesSlice = createSlice({
   name: 'countries',
   initialState,
   reducers: {
-    storeCounries(state, action) {
-      const { loadedCountries, isLoading, error } = action.payload;
-      state.loadedCountries = loadedCountries;
-      state.isLoading = isLoading;
-      state.error = error;
-      state.country = [];
+    storeCountries(state, action) {
+      state.loadedCountries = action.payload;
     },
-    storeCountryDetail(state, action) {
-      const { countryDetail, isLoading, error } = action.payload;
-      state.country = countryDetail;
-      state.isLoading = isLoading;
-      state.error = error;
+    setCountrydetails(state, action) {
+      state.loadedCountryDetails = action.payload;
+    },
+    setFilter(state, action) {
+      state.filterStatus = action.payload;
+    },
+    loadingAction(state, action) {
+      state.isLoading = action.payload;
+    },
+    errorAction(state, action) {
+      state.error = action.payload;
     },
   },
 });
 
-export const getCountries = (query, isRegion = false) => {
+export const getCountries = (query) => {
   return async (dispatch) => {
     let countries = [];
-    let isLoading = true;
-    let error = false;
+    dispatch(countriesActions.loadingAction(true));
+    dispatch(countriesActions.errorAction(false));
 
     let url;
 
-    if (!isRegion) {
-      if (query === 'All') {
-        url = 'https://restcountries.com/v2/all';
-      } else {
-        url = `https://restcountries.com/v2/name/${query}`;
-      }
+    if (query === 'All') {
+      url = 'https://restcountries.com/v2/all';
     } else {
-      url = `https://restcountries.com/v2/region/${query}`;
+      url = `https://restcountries.com/v2/name/${query}`;
     }
 
     const fetchData = async () => {
@@ -58,29 +57,21 @@ export const getCountries = (query, isRegion = false) => {
 
     try {
       countries = await fetchData();
-      isLoading = false;
+      dispatch(countriesSlice.actions.storeCountries(countries));
+      dispatch(countriesActions.loadingAction(false));
     } catch (err) {
-      error = true;
+      dispatch(countriesActions.errorAction(true));
     }
-
-    dispatch(
-      countriesSlice.actions.storeCounries({
-        loadedCountries: countries,
-        isLoading,
-        error,
-      })
-    );
   };
 };
 
-export const getCountyDetail = (query) => {
-  console.log('get detail');
+export const getCountryDetails = (query) => {
   return async (dispatch) => {
-    let countryDetail;
-    let isLoading = true;
-    let error = false;
+    let countryDetails = [];
+    dispatch(countriesActions.loadingAction(true));
+    dispatch(countriesActions.errorAction(false));
 
-    const fetchCountry = async () => {
+    const fetchData = async () => {
       const res = await axios.get(
         `https://restcountries.com/v2/name/${query}?fullText=true`
       );
@@ -93,20 +84,12 @@ export const getCountyDetail = (query) => {
     };
 
     try {
-      const countries = await fetchCountry();
-      countryDetail = countries[0];
-      isLoading = false;
+      countryDetails = await fetchData();
+      dispatch(countriesSlice.actions.setCountrydetails(countryDetails[0]));
+      dispatch(countriesActions.loadingAction(false));
     } catch (err) {
-      error = true;
+      dispatch(countriesActions.errorAction(true));
     }
-
-    dispatch(
-      countriesSlice.actions.storeCountryDetail({
-        countryDetail,
-        isLoading,
-        error,
-      })
-    );
   };
 };
 

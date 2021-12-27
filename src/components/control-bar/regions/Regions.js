@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Card from '../../UI/card/Card';
 import { useDispatch } from 'react-redux';
-import { getCountries } from '../../../store';
+import { countriesActions } from '../../../store';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -16,18 +16,10 @@ const Regions = () => {
     setIsDroped((prevState) => !prevState);
   };
 
-  // Sending request after choosing region + extra option (All world)
+  // filter found countries by reegion
 
-  const regionSearchHandler = (e) => {
-    const region = e.target.innerText;
-    e.target.className = styles.selected;
-
-    if (region === 'All world') {
-      dispatch(getCountries('All'));
-      return;
-    }
-
-    dispatch(getCountries(region, true));
+  const filterHandler = (e) => {
+    dispatch(countriesActions.setFilter(e.target.innerText));
   };
 
   // Styling chevron based on state of dropmenu
@@ -46,23 +38,23 @@ const Regions = () => {
       </Card>
       <Card className={`${styles.options} ${isDroped ? styles.droped : ''}`}>
         <ul>
-          <li className={styles.option} onClick={regionSearchHandler}>
+          <li className={styles.option} onClick={filterHandler}>
             All world
           </li>
-          <li className={styles.option} onClick={regionSearchHandler}>
+          <li className={styles.option} onClick={filterHandler}>
             Africa
           </li>
-          <li className={styles.option} onClick={regionSearchHandler}>
+          <li className={styles.option} onClick={filterHandler}>
             Asia
           </li>
-          <li className={styles.option} onClick={regionSearchHandler}>
+          <li className={styles.option} onClick={filterHandler}>
             Europe
           </li>
-          <li className={styles.option} onClick={regionSearchHandler}>
+          <li className={styles.option} onClick={filterHandler}>
             Oceania
           </li>
-          <li className={styles.option} onClick={regionSearchHandler}>
-            Americas
+          <li className={styles.option} onClick={filterHandler}>
+            America
           </li>
         </ul>
       </Card>

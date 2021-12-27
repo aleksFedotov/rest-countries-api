@@ -1,3 +1,33 @@
 .details {
   margin-top: 8rem;
 }
+
+.back_btn {
+  cursor: pointer;
+  margin-top: 16rem;
+  width: 14rem;
+  padding: 1rem 0;
+  font-size: 600;
+  font-size: 1.6rem;
+  box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  border-radius: 0.4rem;
+}
+
+.back_btn:hover {
+  transform: scale(1.05);
+}
+
+.back_btn:active {
+  transform: scale(0.98);
+}
+
+.arrow {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .back_btn {
+    margin-top: 12rem;
+  }
+}

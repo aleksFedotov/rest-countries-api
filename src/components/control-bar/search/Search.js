@@ -17,7 +17,7 @@ const Search = () => {
   // Sending request after users paused typing
 
   useEffect(() => {
-    // After deliting all input we sending request for all countries
+    // After deliting query we sending request for all countries
     if (searchInput === '') {
       dispatch(getCountries('All'));
       return;
