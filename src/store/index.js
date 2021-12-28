@@ -28,6 +28,9 @@ const countriesSlice = createSlice({
     errorAction(state, action) {
       state.error = action.payload;
     },
+    cleanCountryDetail(state) {
+      state.loadedCountryDetails = null;
+    },
   },
 });
 
@@ -36,6 +39,7 @@ export const getCountries = (query) => {
     let countries = [];
     dispatch(countriesActions.loadingAction(true));
     dispatch(countriesActions.errorAction(false));
+    dispatch(countriesActions.cleanCountryDetail());
 
     let url;
 
@@ -67,25 +71,27 @@ export const getCountries = (query) => {
 
 export const getCountryDetails = (query) => {
   return async (dispatch) => {
-    let countryDetails = [];
     dispatch(countriesActions.loadingAction(true));
     dispatch(countriesActions.errorAction(false));
 
     const fetchData = async () => {
-      const res = await axios.get(
-        `https://restcountries.com/v2/name/${query}?fullText=true`
-      );
+      const res = await axios.get(`https://restcountries.com/v2/name/${query}`);
+
       if (res.data.status) {
-        return [];
+        return {
+          countryDetailsData: [],
+          countriesData: [],
+        };
       }
       if (!res.data.length) return;
 
-      return res.data;
+      return res.data[0];
     };
 
     try {
-      countryDetails = await fetchData();
-      dispatch(countriesSlice.actions.setCountrydetails(countryDetails[0]));
+      const country = await fetchData();
+      dispatch(countriesSlice.actions.setCountrydetails(country));
+
       dispatch(countriesActions.loadingAction(false));
     } catch (err) {
       dispatch(countriesActions.errorAction(true));

@@ -7,7 +7,6 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { getCountryDetails } from '../store';
-import { getCountries } from '../store';
 
 import Card from '../components/UI/card/Card';
 import Country from '../components/country-detail/Country';
@@ -21,18 +20,13 @@ const CountryDetails = () => {
   const params = useParams();
   const { countryName } = params;
 
-  const loadedCountryData = useSelector((state) => state.countries);
+  const loadedData = useSelector((state) => state.countries);
 
-  const { loadedCountryDetails, isLoading, loadedCountries } =
-    loadedCountryData;
+  const { loadedCountryDetails, isLoading } = loadedData;
 
   useEffect(() => {
-    // if (!loadedCountries) {
-    //   dispatch(getCountries('All'));
-    // }
-
     dispatch(getCountryDetails(countryName));
-  }, [dispatch, countryName, loadedCountries]);
+  }, [dispatch, countryName]);
 
   const headBackHandler = () => {
     navigate('/');

@@ -3,10 +3,10 @@ import Card from '../UI/card/Card';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Country.module.css';
-import { useSelector } from 'react-redux';
+
+import { countryListAlpha3 } from '../../utils/countryCodes';
 
 const Country = (props) => {
-  console.log(props.country);
   const {
     name,
     nativeName,
@@ -21,18 +21,7 @@ const Country = (props) => {
     flags,
   } = props.country;
 
-  const loadedCountries = useSelector(
-    (state) => state.countries.loadedCountries
-  );
-
   const navigate = useNavigate();
-
-  const getCountryName = (code) => {
-    const countryName = loadedCountries.find(
-      (country) => country.alpha3Code === code
-    );
-    return countryName.name;
-  };
 
   const countyDetailHandler = (e) => {
     navigate(`/country/${e.target.innerText}`);
@@ -40,14 +29,9 @@ const Country = (props) => {
 
   let borderCountries = <span>none</span>;
   if (borders) {
-    // const borderCountriesNames = borders.map((border) =>
-    //   getCountryName(border)
-    // );
-    // console.log(borderCountriesNames);
-
     borderCountries = borders.map((border) => (
       <Card className={styles.border} key={border}>
-        <span onClick={countyDetailHandler}>{border}</span>
+        <span onClick={countyDetailHandler}>{countryListAlpha3[border]}</span>
       </Card>
     ));
   }

@@ -16,9 +16,9 @@ const CountriesList = () => {
   const { loadedCountries, isLoading, error, filterStatus } = countriesData;
 
   useEffect(() => {
-    if (loadedCountries) return;
-
-    dispatch(getCountries('All'));
+    if (loadedCountries.length === 0) {
+      dispatch(getCountries('All'));
+    }
   }, [dispatch]);
 
   let countriesList;
@@ -71,7 +71,7 @@ const CountriesList = () => {
     </Fragment>
   );
 
-  if (isLoading) {
+  if (isLoading && !loadedCountries.length) {
     content = <FontAwesomeIcon icon={faSpinner} className={styles.spinner} />;
   }
 

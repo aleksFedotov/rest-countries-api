@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { countriesActions } from '../../../store';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
@@ -10,12 +8,10 @@ import { faMoon } from '@fortawesome/free-regular-svg-icons';
 import styles from './Header.module.css';
 
 const Header = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLigthTheme, setIsLigthTheme] = useState(true);
 
   const clickHandler = () => {
-    dispatch(countriesActions.setLoading());
     navigate('/');
   };
 
@@ -28,6 +24,7 @@ const Header = () => {
       root.className = 'light-theme';
     }
   };
+
   return (
     <header className={styles.header}>
       <div className={styles.header_box}>
