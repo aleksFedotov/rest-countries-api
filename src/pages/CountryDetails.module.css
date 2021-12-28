@@ -26,6 +26,25 @@
   margin-right: 1rem;
 }
 
+.spinner {
+  font-size: 5rem;
+  animation: spin infinite 3s linear;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 500px) {
   .back_btn {
     margin-top: 12rem;

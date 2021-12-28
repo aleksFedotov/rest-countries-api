@@ -44,15 +44,17 @@
   padding: 2rem;
 }
 
-.options li {
-  position: relative;
-  width: fit-content;
+.option {
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.options li:after {
+.option span {
+  position: relative;
+}
+
+.option span:after {
   content: '';
   position: absolute;
   width: 100%;
@@ -65,33 +67,26 @@
   transition: transform 0.25s ease-out;
 }
 
-.options li:hover:after {
+.selected span::after {
+  transform: scaleX(1);
+}
+
+.option:hover span:after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-.options li:active {
-  transform: scale(0.95);
+.option:active {
+  transform: scale(0.98);
 }
 
-.options li:not(:first-child) {
+.option:not(:first-child) {
   margin-top: 1rem;
 }
 
 .options.droped {
   max-height: 25rem;
 }
-.options.droped li {
+.options.droped .option {
   opacity: 1;
-}
-
-.selected:after {
-  content: '';
-  position: absolute;
-  transform: scaleX(1);
-  width: 100%;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--color-text);
 }

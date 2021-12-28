@@ -1,6 +1,6 @@
 .country {
   width: 100%;
-  margin-top: 8rem;
+  margin: 8rem 0;
   display: flex;
   align-items: center;
   gap: 12rem;
@@ -9,12 +9,16 @@
 .img-box {
   max-width: 56rem;
   width: 100%;
-  max-height: 40rem;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
 }
 
 .img-box img {
+  flex-shrink: 0;
+  height: 100%;
   width: 100%;
 }
 

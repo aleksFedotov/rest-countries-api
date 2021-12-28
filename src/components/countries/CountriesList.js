@@ -39,9 +39,9 @@ const CountriesList = () => {
         (country) => country.region === 'Europe'
       );
       break;
-    case 'Ocenia':
+    case 'Oceania':
       countriesList = loadedCountries.filter(
-        (country) => country.region === 'Ocenia'
+        (country) => country.region === 'Oceania'
       );
       break;
     case 'America':

@@ -40,13 +40,9 @@ const Country = (props) => {
   if (currencies) {
     CountryCurrencies = currencies.map((currencie, ind) =>
       ind !== currencies.length - 1 ? (
-        <span key={currencie.name}>
-          <span>{currencie.name},</span>{' '}
-        </span>
+        <span key={currencie.name}>{currencie.name}, </span>
       ) : (
-        <span key={currencie.name}>
-          <span>{currencie.name}</span>
-        </span>
+        <span key={currencie.name}>{currencie.name}</span>
       )
     );
   }
@@ -55,13 +51,9 @@ const Country = (props) => {
   if (languages) {
     CountryLanguages = languages.map((language, ind) =>
       ind !== languages.length - 1 ? (
-        <span key={language.name}>
-          <span>{language.name},</span>{' '}
-        </span>
+        <span key={language.name}>{language.name}, </span>
       ) : (
-        <span key={language.name}>
-          <span>{language.name}</span>
-        </span>
+        <span key={language.name}>{language.name}</span>
       )
     );
   }
