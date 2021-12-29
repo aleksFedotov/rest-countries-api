@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/aleksFedotov.github.io/rest-countries-api/static/css/main.40e3de4b.css",
-    "main.js": "/aleksFedotov.github.io/rest-countries-api/static/js/main.9a2d8fe7.js",
+    "main.js": "/aleksFedotov.github.io/rest-countries-api/static/js/main.bc77d75a.js",
     "index.html": "/aleksFedotov.github.io/rest-countries-api/index.html",
     "main.40e3de4b.css.map": "/aleksFedotov.github.io/rest-countries-api/static/css/main.40e3de4b.css.map",
-    "main.9a2d8fe7.js.map": "/aleksFedotov.github.io/rest-countries-api/static/js/main.9a2d8fe7.js.map"
+    "main.bc77d75a.js.map": "/aleksFedotov.github.io/rest-countries-api/static/js/main.bc77d75a.js.map"
   },
   "entrypoints": [
     "static/css/main.40e3de4b.css",
-    "static/js/main.9a2d8fe7.js"
+    "static/js/main.bc77d75a.js"
   ]
 }
