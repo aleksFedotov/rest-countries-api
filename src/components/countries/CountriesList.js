@@ -59,8 +59,8 @@ const CountriesList = () => {
       {countriesList.map((country) => {
         return (
           <CountryCard
-            key={country.name}
-            name={country.name}
+            key={country.name.common}
+            name={country.name.common}
             population={country.population}
             capital={country.capital}
             flagURL={country.flags.png}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../UI/card/Card';
+
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Country.module.css';
@@ -9,12 +10,11 @@ import { countryListAlpha3 } from '../../utils/countryCodes';
 const Country = (props) => {
   const {
     name,
-    nativeName,
     population,
     region,
     subregion,
     capital,
-    topLevelDomain,
+    tld,
     currencies,
     languages,
     borders,
@@ -36,10 +36,11 @@ const Country = (props) => {
     ));
   }
 
-  let CountryCurrencies = <span>none</span>;
+  let countryCurrencies = <span>none</span>;
   if (currencies) {
-    CountryCurrencies = currencies.map((currencie, ind) =>
-      ind !== currencies.length - 1 ? (
+    const loadedCurrencies = Object.values(currencies);
+    countryCurrencies = loadedCurrencies.map((currencie, ind) =>
+      ind !== loadedCurrencies.length - 1 ? (
         <span key={currencie.name}>{currencie.name}, </span>
       ) : (
         <span key={currencie.name}>{currencie.name}</span>
@@ -47,13 +48,26 @@ const Country = (props) => {
     );
   }
 
-  let CountryLanguages = <span>none</span>;
+  let countryLanguages = <span>none</span>;
   if (languages) {
-    CountryLanguages = languages.map((language, ind) =>
-      ind !== languages.length - 1 ? (
-        <span key={language.name}>{language.name}, </span>
+    const loadedLanguages = Object.values(languages);
+    countryLanguages = loadedLanguages.map((language, ind) =>
+      ind !== loadedLanguages.length - 1 ? (
+        <span key={language}>{language}, </span>
       ) : (
-        <span key={language.name}>{language.name}</span>
+        <span key={language}>{language}</span>
+      )
+    );
+  }
+
+  let countryNativeNames;
+  if (name.nativeName) {
+    const loadedNames = Object.values(name.nativeName);
+    countryNativeNames = loadedNames.map((name, ind) =>
+      ind !== loadedNames.length - 1 ? (
+        <span key={name.common}>{name.common}, </span>
+      ) : (
+        <span key={name.common}>{name.common}</span>
       )
     );
   }
@@ -64,11 +78,11 @@ const Country = (props) => {
         <img src={flags.png} alt="flag" />
       </div>
       <div className={styles['info-box']}>
-        <h2 className={styles.name}>{name}</h2>
+        <h2 className={styles.name}>{name.common}</h2>
         <div className={styles['info-details']}>
           <div>
             <h3 className={styles.detail_text}>
-              Native Name: <span>{nativeName}</span>
+              Native Name: <span>{countryNativeNames}</span>
             </h3>
             <h3 className={styles.detail_text}>
               Population: <span>{population.toLocaleString('en-US')}</span>
@@ -85,13 +99,13 @@ const Country = (props) => {
           </div>
           <div>
             <h3 className={styles.detail_text}>
-              Top Level Domain: <span>{topLevelDomain}</span>
+              Top Level Domain: <span>{tld}</span>
             </h3>
             <h3 className={styles.detail_text}>
-              Currencies: {CountryCurrencies}
+              Currencies: {countryCurrencies}
             </h3>
             <h3 className={styles.detail_text}>
-              Languages: {CountryLanguages}
+              Languages: {countryLanguages}
             </h3>
           </div>
         </div>

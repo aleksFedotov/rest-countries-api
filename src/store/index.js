@@ -44,9 +44,9 @@ export const getCountries = (query) => {
     let url;
 
     if (query === 'All') {
-      url = 'https://restcountries.com/v2/all';
+      url = 'https://restcountries.com/v3.1/all';
     } else {
-      url = `https://restcountries.com/v2/name/${query}`;
+      url = `https://restcountries.com/v3.1/name/${query}`;
     }
 
     const fetchData = async () => {
@@ -75,7 +75,9 @@ export const getCountryDetails = (query) => {
     dispatch(countriesActions.errorAction(false));
 
     const fetchData = async () => {
-      const res = await axios.get(`https://restcountries.com/v2/name/${query}`);
+      const res = await axios.get(
+        `https://restcountries.com/v3.1/name/${query}`
+      );
 
       if (res.data.status) {
         return {

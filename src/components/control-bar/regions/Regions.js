@@ -21,6 +21,7 @@ const Regions = () => {
 
   const filterHandler = (e) => {
     dispatch(countriesActions.setFilter(e.target.innerText));
+    setIsDroped((prevState) => !prevState);
   };
 
   // Styling chevron based on state of dropmenu
