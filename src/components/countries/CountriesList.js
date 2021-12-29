@@ -19,7 +19,7 @@ const CountriesList = () => {
     if (loadedCountries.length === 0) {
       dispatch(getCountries('All'));
     }
-  }, [dispatch]);
+  }, [dispatch, loadedCountries]);
 
   let countriesList;
 
